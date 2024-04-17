@@ -5,19 +5,27 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import me.projekat.model.Kandidat;
+import me.projekat.rest.server.IpLog;
 
 import java.util.List;
 
 @Dependent
 public class KandidatService {
 
-@Inject
-private EntityManager em;
+    @Inject
+    private EntityManager em;
 
     @Transactional
-    public Kandidat createKandidat(Kandidat kandidat) {
+    public Kandidat createKandidat(Kandidat kandidat, IpLog iplog) throws Exception {
+        List<Kandidat> kandidats = getAll();
+        if (kandidats.contains(kandidat)) {
+            throw new Exception();
+        }
+        kandidat.setIpLog(iplog);
         return em.merge(kandidat);
     }
+
+    ;
 
     @Transactional
     public Kandidat updateKandidat(Kandidat kandidat) {
@@ -35,9 +43,10 @@ private EntityManager em;
     public Kandidat getKandidatById(Long kandidatId) {
         return em.find(Kandidat.class, kandidatId);
     }
+
     @Transactional
-    public List<Kandidat> getAll(){
-    return em.createNamedQuery(Kandidat.GET_ALL, Kandidat.class).getResultList();
+    public List<Kandidat> getAll() {
+        return em.createNamedQuery(Kandidat.GET_ALL, Kandidat.class).getResultList();
     }
 
 }

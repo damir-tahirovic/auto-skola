@@ -1,9 +1,6 @@
 package me.projekat.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Oblast {
@@ -13,6 +10,7 @@ public class Oblast {
     private Long id;
 
     private String naziv;
+
 
     public Long getId() {
         return id;

@@ -1,6 +1,9 @@
 package me.projekat.model;
 
 import jakarta.persistence.*;
+import me.projekat.model.restClient.IpClient;
+import me.projekat.rest.server.IpLog;
+//import me.projekat.rest.server.Iplog;
 
 import java.util.Date;
 import java.util.Set;
@@ -29,6 +32,9 @@ public class Kandidat {
     @JoinColumn(name = "student_id")
     private Set<Telefon> telefoni;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private IpLog ipLog;
+
     public Long getId() {
         return id;
     }
@@ -53,8 +59,6 @@ public class Kandidat {
         this.prezime = prezime;
     }
 
-
-
     public String getJmbg() {
         return jmbg;
     }
@@ -70,5 +74,22 @@ public class Kandidat {
     public void setDatumRodjenja(Date datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
     }
+
+    public Set<Telefon> getTelefoni() {
+        return telefoni;
+    }
+
+    public void setTelefoni(Set<Telefon> telefoni) {
+        this.telefoni = telefoni;
+    }
+
+    public IpLog getIpLog() {
+        return ipLog;
+    }
+
+    public void setIpLog(IpLog ipLog) {
+        this.ipLog = ipLog;
+    }
 }
+
 
