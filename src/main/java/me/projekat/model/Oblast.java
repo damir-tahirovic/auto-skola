@@ -2,6 +2,8 @@ package me.projekat.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 public class Oblast {
 
@@ -11,6 +13,8 @@ public class Oblast {
 
     private String naziv;
 
+    @OneToMany(mappedBy = "oblast")
+    private Set<RadnikPoznajeOblast> radnici;
 
     public Long getId() {
         return id;
@@ -26,5 +30,13 @@ public class Oblast {
 
     public void setNaziv(String naziv) {
         this.naziv = naziv;
+    }
+
+    public Set<RadnikPoznajeOblast> getRadnici() {
+        return radnici;
+    }
+
+    public void setRadnici(Set<RadnikPoznajeOblast> radnici) {
+        this.radnici = radnici;
     }
 }

@@ -1,10 +1,8 @@
 package me.projekat.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Radnik {
@@ -22,6 +20,9 @@ public class Radnik {
     private String jmbg;
 
     private String brojTelefona;
+
+    @OneToMany(mappedBy = "radnik")
+    private Set<RadnikPoznajeOblast> oblasti;
 
     public Long getId() {
         return id;
@@ -69,5 +70,13 @@ public class Radnik {
 
     public void setBrojTelefona(String brojTelefona) {
         this.brojTelefona = brojTelefona;
+    }
+
+    public Set<RadnikPoznajeOblast> getOblasti() {
+        return oblasti;
+    }
+
+    public void setOblasti(Set<RadnikPoznajeOblast> oblasti) {
+        this.oblasti = oblasti;
     }
 }
